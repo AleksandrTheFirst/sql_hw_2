@@ -29,6 +29,7 @@ artist_id integer NOT NULL REFERENCES artist(id)
 
 CREATE TABLE IF NOT EXISTS track(
 id SERIAL NOT NULL PRIMARY KEY,
+album_id integer NOT NULL REFERENCES album(id),
 track_name varchar(100) NOT NULL,
 track_length integer NOT NULL
 CONSTRAINT track_length CHECK (track_length > 0)
