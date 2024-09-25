@@ -1,47 +1,47 @@
-create table if not exists genre (
-id SERIAL not null primary key,
-name varchar(50) not null
+CREATE TABLE IF NOT EXISTS genre (
+id SERIAL NOT NULL PRIMARY KEY,
+name varchar(50) NOT NULL
 );
 
-create table if not exists artist(
-id SERIAL not null primary key,
-nick_name varchar(50) not null
+CREATE TABLE IF NOT EXISTS artist(
+id SERIAL NOT NULL PRIMARY KEY,
+nick_name varchar(50) NOT NULL
 );
 
-create table if not exists genre_artist(
-id SERIAL primary key,
-genre_id integer not null references genre(id),
-artist_id integer not null references artist(id)
+CREATE TABLE IF NOT EXISTS genre_artist(
+id SERIAL PRIMARY KEY,
+genre_id integer NOT NULL REFERENCES genre(id),
+artist_id integer NOT NULL REFERENCES artist(id)
 );
 
-create table if not exists album(
-id SERIAL not null primary key,
-album_name varchar(100) not null,
-album_year integer not null,
-constraint album_year check (album_year > 1000)
-); 
-
-create table if not exists genre_album(
-id SERIAL primary key,
-album_id integer not null references album(id),
-artist_id integer not null references artist(id)
+CREATE TABLE IF NOT EXISTS album(
+id SERIAL NOT NULL PRIMARY KEY,
+album_name varchar(100) NOT NULL,
+album_year integer NOT NULL,
+CONSTRAINT album_year CHECK (album_year > 1000)
 );
 
-create table if not exists track(
-id SERIAL not null primary key,
-track_name varchar(100) not null,
-track_length integer not null
-constraint track_length check (track_length > 0)
-); 
+CREATE TABLE IF NOT EXISTS genre_album(
+id SERIAL PRIMARY KEY,
+album_id integer NOT NULL REFERENCES album(id),
+artist_id integer NOT NULL REFERENCES artist(id)
+);
 
-create table if not exists songs_collection(
-id SERIAL not null primary key,
-collection_year integer not null,
-constraint collection_year check (collection_year > 1000),
-collection_name varchar(100) not null);
+CREATE TABLE IF NOT EXISTS track(
+id SERIAL NOT NULL PRIMARY KEY,
+track_name varchar(100) NOT NULL,
+track_length integer NOT NULL
+CONSTRAINT track_length CHECK (track_length > 0)
+);
 
-create table if not exists track_collection(
-id SERIAL primary key,
-track_id integer not null references track(id),
-collection_id integer not null references songs_collection(id)
+CREATE TABLE IF NOT EXISTS songs_collection(
+id SERIAL NOT NULL PRIMARY KEY,
+collection_year integer NOT NULL,
+CONSTRAINT collection_year CHECK (collection_year > 1000),
+collection_name varchar(100) NOT NULL);
+
+CREATE TABLE IF NOT EXISTS track_collection(
+id SERIAL PRIMARY KEY,
+track_id integer NOT NULL REFERENCES track(id),
+collection_id integer NOT NULL REFERENCES songs_collection(id)
 );
